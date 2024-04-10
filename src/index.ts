@@ -1,15 +1,21 @@
-import { Application, Loader} from 'pixi.js'
+import { Application, Loader, Ticker} from 'pixi.js'
 import { assets } from './assets';
-import { Scene } from './Scene';
+import { Keyboard } from './utils/Keyboard';
+import { Caminando } from './scenes/Caminando';
+
+export const WIDTH = 1280;
+export const HEIGHT = 720;
 
 const app = new Application({
 	view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
 	resolution: window.devicePixelRatio || 1,
 	autoDensity: true,
 	backgroundColor: 0x6495ed,
-	width: 1280,
-	height: 720
+	width: WIDTH,
+	height: HEIGHT
 });
+
+Keyboard.initialize();
 
 window.addEventListener("resize",()=>{
 	console.log("rezize!");
@@ -36,7 +42,10 @@ window.dispatchEvent(new Event("resize"));
 
 Loader.shared.add(assets);
 Loader.shared.onComplete.add(()=>{
-	const myScene = new Scene();
+	const myScene = new Caminando();
 	app.stage.addChild(myScene);
+	Ticker.shared.add(function(){
+		myScene.update(Ticker.shared.FPS,Ticker.shared.deltaMS);
+	});
 });
 Loader.shared.load();

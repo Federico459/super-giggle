@@ -1,6 +1,6 @@
 import { AnimatedSprite, Container, Graphics, Texture ,Text, NineSlicePlane} from "pixi.js";
-import { HomeroSombrero } from "./HomeroSombrero";
-import { Mago } from "./Mago";
+import { HomeroSombrero } from "../objects/HomeroSombrero";
+import { Mago } from "../objects/Mago";
 
 export class Scene extends Container{
     constructor(){
