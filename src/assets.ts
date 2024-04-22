@@ -16,6 +16,13 @@ export const assets = [
     {url: "./persona/caminar03.png", name: "caminar03"},
     {url: "./persona/caminar04.png", name: "caminar04"},
     {url: "./persona/caminar05.png", name: "caminar05"},
+    {url: "./hat/hat1.png", name: "hat1"},
+    {url: "./hat/hat2.png", name: "hat2"},
+    {url: "./hat/hat3.png", name: "hat3"},
+    {url: "./hat/hat4.png", name: "hat4"},
+    {url: "./beans/beanBlue1.png", name: "beanBlue1"},
+    {url: "./beans/beanBlue2.png", name: "beanBlue2"},
+    {url: "./beans/beanBlue3.png", name: "beanBlue3"},
     {url: "./persona/parado01.png", name: "parado01"},
     {url: "./loseta.png", name: "loseta"},
 

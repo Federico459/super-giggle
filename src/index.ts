@@ -1,10 +1,10 @@
 import { Application, Loader, Ticker} from 'pixi.js'
 import { assets } from './assets';
 import { Keyboard } from './utils/Keyboard';
-import { Caminando } from './scenes/Caminando';
+import { Game } from './scenes/Game';
 
-export const WIDTH = 1280;
-export const HEIGHT = 720;
+export const WIDTH = 1920;
+export const HEIGHT = 1080;
 
 const app = new Application({
 	view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
@@ -42,10 +42,10 @@ window.dispatchEvent(new Event("resize"));
 
 Loader.shared.add(assets);
 Loader.shared.onComplete.add(()=>{
-	const myScene = new Caminando();
-	app.stage.addChild(myScene);
+	const game = new Game();
+	app.stage.addChild(game);
 	Ticker.shared.add(function(){
-		myScene.update(Ticker.shared.FPS,Ticker.shared.deltaMS);
+		game.update(Ticker.shared.FPS,Ticker.shared.deltaMS);
 	});
 });
 Loader.shared.load();

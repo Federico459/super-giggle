@@ -7,7 +7,7 @@ export class Platform extends Container implements IHitbox{
         super();
         this.hitBox = new Graphics();
         this.hitBox.beginFill(0xFF0000,0.6);
-        this.hitBox.drawRect(0,0,300,100);
+        this.hitBox.drawRect(0,0,300,25);
         this.hitBox.endFill();
         this.addChild(this.hitBox);
     }
