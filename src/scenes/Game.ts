@@ -4,6 +4,7 @@ import { HEIGHT, WIDTH } from "..";
 import { Player01 } from "../game/Player01";
 import { Platform } from "../game/Plataform";
 import { checkCollision } from "../game/IHitbox";
+import { Coin } from "../game/Coin";
 
 export class Game extends Container implements IUpdateable{
 
@@ -11,6 +12,8 @@ export class Game extends Container implements IUpdateable{
     private player1: Player01;
     private platforms: Platform[];
     private plataform01: Platform;
+    private coins: Coin[];
+    private coin01: Coin;
 
     constructor(){
         super();
@@ -58,6 +61,13 @@ export class Game extends Container implements IUpdateable{
         this.platforms.push(this.plataform01);
         this.world.addChild(this.plataform01);
 
+        this.coins = [];
+
+        this.coin01 = new Coin();
+        this.coin01.position.set(600,800);
+        this.coins.push(this.coin01);
+        this.world.addChild(this.coin01);
+
         this.addChild(this.world);
     }
     
@@ -82,6 +92,39 @@ export class Game extends Container implements IUpdateable{
                         this.player1.canJump = true;
                     } else if (this.player1.y < platform.y + platform.height
                         && this.player1.y > platform.y
+                        && this.player1.speed.y < 0) {
+                        this.player1.y += overlap.height;
+                        this.player1.speed.y = 0;
+                    }
+                }
+            }
+
+            if(this.player1.width>0){
+                this.world.x = -this.player1.x * this.worldTransform.a + WIDTH/4;
+            } else {
+                this.world.x = -this.player1.width -this.player1.x * this.worldTransform.a + WIDTH/4;
+            }
+            
+        }
+
+        for (const coin of this.coins) {
+            const overlap = checkCollision(this.player1, coin);
+            if(overlap != null){
+                if(overlap.width < overlap.height){
+                    if(this.player1.x > coin.x){
+                        this.player1.x += overlap.width;
+                    } else if (this.player1.x < coin.x) {
+                        this.player1.x -= overlap.width;
+                    }
+                } else {
+                    if(this.player1.y + this.player1.height > coin.y 
+                        && this.player1.y < coin.y 
+                        && this.player1.speed.y > 0){
+                        this.player1.y -= overlap.height;
+                        this.player1.speed.y = 0;
+                        this.player1.canJump = true;
+                    } else if (this.player1.y < coin.y + coin.height
+                        && this.player1.y > coin.y
                         && this.player1.speed.y < 0) {
                         this.player1.y += overlap.height;
                         this.player1.speed.y = 0;
