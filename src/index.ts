@@ -1,12 +1,13 @@
 import { Application, Loader, Ticker} from 'pixi.js'
 import { assets } from './assets';
 import { Keyboard } from './utils/Keyboard';
-import { Game } from './scenes/Game';
+import { SceneManager } from './utils/SceneManager';
+import { Menu } from './scenes/Menu';
 
 export const WIDTH = 1920;
 export const HEIGHT = 1080;
 
-const app = new Application({
+export const app = new Application({
 	view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
 	resolution: window.devicePixelRatio || 1,
 	autoDensity: true,
@@ -42,10 +43,14 @@ window.dispatchEvent(new Event("resize"));
 
 Loader.shared.add(assets);
 Loader.shared.onComplete.add(()=>{
-	const game = new Game();
-	app.stage.addChild(game);
+	/*const myScene = new Menu();
+	app.stage.addChild(myScene);*/
+	const myScene = new Menu();
+	SceneManager.initialize();
+	SceneManager.changeScene(myScene);
 	Ticker.shared.add(function(){
-		game.update(Ticker.shared.FPS,Ticker.shared.deltaMS);
+		myScene.update(Ticker.shared.FPS,Ticker.shared.deltaMS);
 	});
 });
 Loader.shared.load();
+

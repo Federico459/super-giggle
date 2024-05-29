@@ -9,8 +9,8 @@ export class Player01 extends PhysicsContainer implements IHitbox{
 
     private hatAnimated: AnimatedSprite;
     private hitBox: Graphics;
-    private static readonly GRAVITY = 350;
-    private static readonly MOVE_SPEED = 350;
+    private static readonly GRAVITY = 900;
+    private static readonly MOVE_SPEED = 700;
     public canJump = true;
 
     constructor(){
@@ -31,9 +31,9 @@ export class Player01 extends PhysicsContainer implements IHitbox{
         this.hatAnimated.animationSpeed = 0.009;
 
         this.hitBox = new Graphics();
-        this.hitBox.beginFill(0xFF00FF,0.3);
-        //this.hitBox.drawRect(0,0,this.hatAnimated.width,this.hatAnimated.height);
-        this.hitBox.drawCircle(this.hatAnimated.width/2,this.hatAnimated.width/2,this.hatAnimated.width/2);
+        this.hitBox.beginFill(0xFF00FF,0.01);
+        this.hitBox.drawRect(this.hatAnimated.width/4,this.hatAnimated.height/4,this.hatAnimated.width/2,this.hatAnimated.height/2);
+        //this.hitBox.drawCircle(this.hatAnimated.width/2,this.hatAnimated.width/2,this.hatAnimated.width/2);
         this.hitBox.endFill();
 
         this.addChild(this.hatAnimated);
@@ -91,7 +91,7 @@ export class Player01 extends PhysicsContainer implements IHitbox{
         if(this.canJump){
             sound.play("salto01");
             this.canJump = false;
-            this.speed.y = -Player01.MOVE_SPEED*1.2;
+            this.speed.y = -800;
         }
     }
 
